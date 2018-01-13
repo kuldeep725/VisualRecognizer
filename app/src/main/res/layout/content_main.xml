@@ -35,6 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
+                android:src="@drawable/ic_photo_camera_black_24dp"
                 android:scaleType="fitCenter"/>
 
         </FrameLayout>
@@ -50,6 +51,7 @@
             android:id="@+id/cameraFab"
             android:layout_width="30dp"
             android:layout_height="40dp"
+            android:elevation="1dp"
             android:background="@android:color/transparent"
             android:src="@android:drawable/ic_menu_camera"/>
     </FrameLayout>
@@ -62,7 +64,6 @@
         android:layout_below="@+id/swipeView"
         android:divider="@drawable/vertical_divider"
         android:showDividers="middle"
-        android:background="#fafafa"
         android:baselineAligned="false">
         <!--<ScrollView-->
         <!--android:layout_width="match_parent"-->
@@ -75,6 +76,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/classifyText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -92,6 +94,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="10dp"
+                android:scrollbars="none"
                 android:divider="@android:color/transparent"
                 android:dividerHeight="10.0sp"
                 android:textAlignment="center">
@@ -106,6 +109,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/facialText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -123,6 +127,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="10dp"
+                android:scrollbars="none"
                 android:divider="@android:color/transparent"
                 android:dividerHeight="10.0sp"
                 android:textAlignment="center">

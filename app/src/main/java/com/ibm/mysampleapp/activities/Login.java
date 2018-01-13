@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -98,7 +97,7 @@ public class Login extends AppCompatActivity {
                         // The ApiException status code indicates the detailed failure reason.
                         // Please refer to the GoogleSignInStatusCodes class reference for more information.
                         Log.d(TAG, "signInResult:failed code=" + e.getStatusCode());
-                        Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show();
 //                        updateUI(null);
                 }
         }

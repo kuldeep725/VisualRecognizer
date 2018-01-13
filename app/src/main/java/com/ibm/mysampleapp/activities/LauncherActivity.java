@@ -46,6 +46,7 @@ public class LauncherActivity extends AppCompatActivity {
                                 Intent i = new Intent(LauncherActivity.this, MainActivity.class);
                                 i.putExtra(KEY, CAMERA_FULL);
                                 startActivity(i);
+                                finish();
                         }
                 });
                 galleryFull.setOnClickListener(new View.OnClickListener() {
@@ -54,6 +55,7 @@ public class LauncherActivity extends AppCompatActivity {
                                 Intent i = new Intent(LauncherActivity.this, MainActivity.class);
                                 i.putExtra(KEY, GALLERY_FULL);
                                 startActivity(i);
+                                finish();
                         }
                 });
                 logOut.setOnClickListener(new View.OnClickListener() {

@@ -6,6 +6,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.RemoteException;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -17,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ibm.mobilefirstplatform.clientsdk.android.core.api.BMSClient;
@@ -60,6 +62,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         private ListView classifyListView;
         ProgressDialog progressDialog;
         private  SwipeRefreshLayout swipeView;
+        private TextView classifyTextView;
+        private TextView facialTextView;
 
         @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,28 +86,15 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         faceListView = (ListView) findViewById(R.id.listOfFaceDetect);
         classifyListView = (ListView) findViewById(R.id.listOfClassify);
         classifyList = new ArrayList<>();
-//        classifyList.add("Classified");
         faceDetectList = new ArrayList<>();
-//        faceDetectList.add("Facial");
+        classifyTextView = (TextView) findViewById(R.id.classifyText);
+        facialTextView = (TextView) findViewById(R.id.facialText);
 
-       swipeView = (SwipeRefreshLayout) findViewById(R.id.swipeView);
-       swipeView.setOnRefreshListener(this);
-        /**
-         * Showing Swipe Refresh animation on activity create
-         * As animation won't start on onCreate, post runnable is used
-         */
-//        swipeView.post(new Runnable() {
-//                                    @Override
-//                                    public void run() {
-//                                        swipeView.setRefreshing(true);
-//                                            try {
-//                                                    processImage(imageFile);
-//                                            } catch (SSLException e) {
-//                                                    e.printStackTrace();
-//                                            }
-//                                    }
-//                                }
-//        );
+        swipeView = (SwipeRefreshLayout) findViewById(R.id.swipeView);
+        classifyTextView.setVisibility(View.INVISIBLE);
+        facialTextView.setVisibility(View.INVISIBLE);
+        swipeView.setOnRefreshListener(this);
+
        final ImageButton fab = (ImageButton) findViewById(R.id.fab);
 	fab.setOnClickListener(new View.OnClickListener() {
 	    @Override
@@ -115,65 +106,23 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 //            FloatingActionButton cameraFab = (FloatingActionButton) findViewById(R.id.cameraFab);
                 ImageButton cameraFab = (ImageButton) findViewById(R.id.cameraFab);
                 cameraFab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                        Log.d(TAG, "onClick for cameraFab started");
-                        cameraHelper.dispatchTakePictureIntent();
-                        Log.d(TAG, "onClick for cameraFab ended");
-                }
-        });
+                        @Override
+                        public void onClick(View v) {
+                                Log.d(TAG, "onClick for cameraFab started");
+                                cameraHelper.dispatchTakePictureIntent();
+                                Log.d(TAG, "onClick for cameraFab ended");
+                        }
+                });
 
                 RelativeLayout rl = (RelativeLayout) findViewById(R.id.relativeLayout);
 
-                rl.setOnTouchListener(new OnSwipeTouchListener(MainActivity.this) {
-                        public void onSwipeTop() {
-                                 fab.setVisibility(View.INVISIBLE);
-//                                Toast.makeText(MainActivity.this, "top", Toast.LENGTH_SHORT).show();
-                        }
+                loadedImage.setOnTouchListener(new OnSwipeTouchListener(MainActivity.this) {
+
                         public void onSwipeRight() {
-//                                Toast.makeText(MainActivity.this, "right", Toast.LENGTH_SHORT).show();
                                 cameraHelper.dispatchTakePictureIntent();
                         }
-                        public void onSwipeLeft() {
-//                                Toast.makeText(MainActivity.this, "left", Toast.LENGTH_SHORT).show();
-                        }
-                        public void onSwipeBottom() {
-                                fab.setVisibility(View.VISIBLE);
-//                                Toast.makeText(MainActivity.this, "Loading...", Toast.LENGTH_SHORT).show();
-                                try {
-                                        processImage(imageFile);
-                                } catch (SSLException e) {
-                                        e.printStackTrace();
-                                }
-//                                Toast.makeText(MainActivity.this, "bottom", Toast.LENGTH_SHORT).show();
-                        }
 
-                });
-                findViewById(R.id.facialLayout).setOnTouchListener(new OnSwipeTouchListener(MainActivity.this) {
-                         public void onSwipeTop() {
-                                 Log.d(TAG, "onSwipeTop is fired (Facial Layout)");
-                                 fab.setVisibility(View.INVISIBLE);
-//                                Toast.makeText(MainActivity.this, "top", Toast.LENGTH_SHORT).show();
-                        }
-                        public void onSwipeRight() {
-//                                Toast.makeText(MainActivity.this, "right", Toast.LENGTH_SHORT).show();
-//                                cameraHelper.dispatchTakePictureIntent();
-                        }
-                        public void onSwipeLeft() {
-//                                Toast.makeText(MainActivity.this, "left", Toast.LENGTH_SHORT).show();
-                        }
-                        public void onSwipeBottom() {
-                                fab.setVisibility(View.VISIBLE);
-                                Log.d(TAG, "onSwipeBottom is fired (Facial Layout)");
-//                                Toast.makeText(MainActivity.this, "Loading...", Toast.LENGTH_SHORT).show();
-//                                try {
-//                                        processImage(imageFile);
-//                                } catch (SSLException e) {
-//                                        e.printStackTrace();
-//                                }
-//                                Toast.makeText(MainActivity.this, "bottom", Toast.LENGTH_SHORT).show();
-                        }
-                });
+         });
 	// Core SDK must be initialized to interact with Bluemix Mobile services.
 	BMSClient.getInstance().initialize(getApplicationContext(), BMSClient.REGION_UK);
 
@@ -212,6 +161,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                         } catch (SSLException e) {
                                 Log.e(TAG, "SSL EXCEPTION has occured");
                                 e.printStackTrace();
+                        } catch (RemoteException e) {
+                                e.printStackTrace();
                         }
                 }
 
@@ -224,14 +175,15 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                         } catch (SSLException e) {
                                 Log.e(TAG, "SSL EXCEPTION has occured");
                                 e.printStackTrace();
+                        } catch (RemoteException e) {
+                                e.printStackTrace();
                         }
                 }
 	}
 
-        private void processImage(final File imageFile) throws SSLException {
+        private void processImage(final File imageFile) throws SSLException, RemoteException {
 
                 Log.d(TAG, "ImageFile = "+ imageFile);
-//                if(imageFile != null) {
                 if(!isInternetOn()) {
                         Toast.makeText(MainActivity.this, "Internet is not working", Toast.LENGTH_SHORT).show();
                         return;
@@ -243,165 +195,17 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 faceListView.setAdapter(null);
                 classifyList.clear();
                 faceDetectList.clear();
-//                        final ProgressDialog progressDialog = new ProgressDialog(this);
-//                        progressDialog.setTitle("VisualRecognizer");
-//                        progressDialog.setMessage("Analyzing image...");
-//                        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//                        progressDialog.setIndeterminate(true);
-//                        progressDialog.setMax(100);
-//                        progressDialog.show();
-////                        progressDialog.setCancelable(false);
-//                        new Thread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        try {
-//                            while (progressDialog.getProgress() <= progressDialog.getMax()) {
-//                                Thread.sleep(200);
-//                                if (progressDialog.getProgress() == progressDialog.getMax()) {
-//                                    progressDialog.dismiss();
-//                                }
-//                            }
-//                        } catch (Exception e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                  }).start();
-//            }
-            AnalyzeImage analyzeImage = new AnalyzeImage();
-            analyzeImage.execute();
-//                        AsyncTask.execute(new Runnable() {
-//                                @Override
-//                                public void run() {
-//                                        classifyImage();
-//                                        imageFaceDetection();
-//                                }
-//
-//                        });
-
-                }
-
-        private void imageFaceDetection() {
+                classifyTextView.setVisibility(View.VISIBLE);
+                facialTextView.setVisibility(View.VISIBLE);
                 try {
-                        if(service != null) {
-                                detectFaces = service.detectFaces(
-                                        new VisualRecognitionOptions.Builder()
-                                                .images(imageFile)
-                                                .build()
-                                ).execute();
-                        }
-                        else {
-                                Log.e(TAG, "Service is null");
-                                return;
-                        }
-                }
-                catch (Exception e) {
-                        Log.d(TAG, "Unable to load information");
-                        Log.e(TAG, "SSL EXCEPTION");
-                        return;
-                }
-                if(detectFaces != null) {
-                        runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                        List<Face> faces = detectFaces.getImages().get(0).getFaces();
-                                        Log.d(TAG, "FACES = "+faces.toString());
-                                        Log.d(TAG, "FACES.size() = "+faces.size());
-                                        int i = 0;
-                                        for(Face face : faces) {
-                                                String s="";
-                                                if(i != 0) {
-                                                        //something to be added
-                                                }
-                                                Log.d(TAG, "face.toString = "+face.toString());
-                                                if(face.getIdentity() != null) {
-                                                        faceDetectList.add(String.valueOf(face.getIdentity().getName()));Log.d(TAG, "face.getIdentity() = "+ face.getIdentity().getName());
-                                                }
-                                                if(face.getGender() != null) {
-                                                        faceDetectList.add(String.valueOf(face.getGender().getGender()));     Log.d(TAG, "face.getGender() = " +face.getGender().getGender());
-                                                }
-                                                if(face.getAge() != null) {
-                                                        faceDetectList.add(String.valueOf(face.getAge().getMin()+"-"+face.getAge().getMax()));Log.d(TAG,"face.getAge() = " +face.getAge().getMin()+"-"+face.getAge().getMax());
-                                                }
-//                                                if(face.getLocation() != null) {
-//                                                        faceDetectList.add(String.valueOf(face.getLocation().getWidth()));               Log.d(TAG, "face.getLocation() = " + face.getLocation().getWidth());
-//                                                }
-                                                i++;
-                                        }
-                                        Log.d(TAG, "FaceDetectList ="+faceDetectList);
-                                        if(faceDetectList != null) {
-                                                faceDetectAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_expandable_list_item_1, faceDetectList);
-                                                faceListView.setAdapter(faceDetectAdapter);
-                                                faceDetectAdapter.notifyDataSetChanged();
-                                        }
-                                }
-                        });
-
-                }
-        }
-
-        private void classifyImage() {
-
-                try {
-                        response = service.classify(
-                                new ClassifyImagesOptions.Builder()
-                                        .images(imageFile)
-                                        .build()
-                        ).execute();
-
-                }
-                catch (Exception e) {
-                        Log.d(TAG, "Unable to load information");
-                        Log.e(TAG, "SSL EXCEPTION");
-                        return;
+                        AnalyzeImage analyzeImage = new AnalyzeImage();
+                        analyzeImage.execute();
+                } catch (RuntimeException e) {
+                        Log.d(TAG, "RUN TIME EXCEPTION : " + e.getMessage());
                 }
 
-//                Log.d(TAG, "response = " + response);
-                if(response != null) {
-//                                                Log.d(TAG, "respone = " + response);
-                       runOnUiThread(new Runnable() {
-                               @Override
-                               public void run() {
-                                       ImageClassification classification =
-                                               response.getImages().get(0);
-                                       VisualClassifier classifier =
-                                               classification.getClassifiers().get(0);
-                                       for(VisualClassifier.VisualClass object : classifier.getClasses()) {
-                                               Log.d(TAG, "getName = " + object.getName());
-                                               Log.d(TAG, "getScore = " + object.getScore());
-                                               if(object.getName().length() < 10 && !classifyList.contains(object.getName())) {
-                                                       classifyList.add(object.getName());
-                                               }
-                                       }
-                                       Log.d(TAG, "CLASSIFYLIST = "+classifyList);
-                                       if(classifyList != null) {
-                                               classifyAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_expandable_list_item_1, classifyList);
-                                               classifyListView.setAdapter(classifyAdapter);
-                                               classifyAdapter.notifyDataSetChanged();
-                                       }
-                               }
-                       });
+         }
 
-
-//                        runOnUiThread(new Runnable() {
-//                                @Override
-//                                public void run() {
-//                                        TextView multiLineText =
-//                                                (TextView) findViewById(R.id.multiLineText);
-//                                        multiLineText.setText(output);
-//                                }
-//                        });
-                }
-                else {
-                        Log.d(TAG, "respone is null");
-                }
-        }
-//                                                        if(object.getScore() > 0.7f) {
-//                                output.append("\" ")
-//                                        .append(object.getName())
-//                                                                        .append(", ")
-//                                                                        .append(object.getScore())
-//                                        .append("\" \n");
-//                                                        }
         @Override
     public void onResume() {
 	super.onResume();
@@ -468,12 +272,12 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 try {
                         swipeView.setRefreshing(false);
                         processImage(imageFile);
-                } catch (SSLException e) {
+                } catch (SSLException | RemoteException e) {
                         e.printStackTrace();
                 }
         }
 
-        private class AnalyzeImage extends AsyncTask<Void, Void, Void> {
+        private class AnalyzeImage extends AsyncTask<Void, Void, Void>  {
 
                 @Override
                 protected void onPreExecute() {
@@ -484,35 +288,19 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                         progressDialog.setIndeterminate(true);
                         progressDialog.show();
-                        progressDialog.setCancelable(false);
                 }
                 @Override
-                protected Void doInBackground(Void... params)  {
-
+                protected Void doInBackground(Void... params) {
                         response = service.classify(
                                 new ClassifyImagesOptions.Builder()
                                         .images(imageFile)
                                         .build()
                         ).execute();
-                        //                        try {
-//                                if(service != null) {
-                                        detectFaces = service.detectFaces(
-                                                new VisualRecognitionOptions.Builder()
-                                                        .images(imageFile)
-                                                        .build()
-                                        ).execute();
-//                                }
-//                                else {
-//                                        Log.e(TAG, "Service is null");
-//                                        return null;
-//                                }
-//                        }
-//                        catch (Exception e) {
-//                                Log.d(TAG, "Unable to load information");
-//                                Log.e(TAG, "SSL EXCEPTION");
-//                                Toast.makeText(MainActivity.this, "Internet is not working", Toast.LENGTH_SHORT).show();
-//                                return null;
-//                        }
+                        detectFaces = service.detectFaces(
+                                new VisualRecognitionOptions.Builder()
+                                        .images(imageFile)
+                                        .build()
+                        ).execute();
                         return null;
                 }
 
@@ -520,6 +308,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 protected void onPostExecute(Void aVoid) {
                         super.onPostExecute(aVoid);
                         progressDialog.dismiss();
+                        progressDialog  = null;
                         if(response != null) {
 //                                                Log.d(TAG, "respone = " + response);
                                 runOnUiThread(new Runnable() {
@@ -545,15 +334,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                                         }
                                 });
 
-
-//                        runOnUiThread(new Runnable() {
-//                                @Override
-//                                public void run() {
-//                                        TextView multiLineText =
-//                                                (TextView) findViewById(R.id.multiLineText);
-//                                        multiLineText.setText(output);
-//                                }
-//                        });
                         }
                         else {
                                 Log.d(TAG, "respone is null");

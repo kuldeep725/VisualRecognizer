@@ -3,23 +3,26 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             android:background="#0099cc"
+             android:background="#fff"
              tools:context=".activities.LauncherActivity">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Click here to login"
-        android:layout_marginTop="100dp"
-        android:layout_gravity="center_horizontal"
-        android:textColor="#ffffff"
-        android:textSize="30sp"/>
-
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Click here to login"-->
+        <!--android:layout_marginTop="100dp"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:textColor="#ffffff"-->
+        <!--android:textSize="30sp"/>-->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:src="@drawable/door_entering"/>
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_in_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="450dp"
         android:layout_gravity="center_horizontal"
         />
 </FrameLayout>

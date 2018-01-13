@@ -39,6 +39,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:adjustViewBounds="false"
+        android:elevation="1dp"
         android:cropToPadding="false"
         android:background="?android:attr/selectableItemBackground"
         android:src="@drawable/photo_gallery_48"/>
