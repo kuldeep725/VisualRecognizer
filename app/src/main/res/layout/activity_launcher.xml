@@ -1,0 +1,87 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="#0099cc"
+             tools:context=".activities.LauncherActivity">
+
+    <!-- The primary full-screen view. This can be replaced with whatever view
+         is needed to present your content, e.g. VideoView, SurfaceView,
+         TextureView, etc. -->
+    <TextView
+        android:id="@+id/fullscreen_content"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:keepScreenOn="true"
+        android:text="Welcome !"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:layout_marginTop="50dp"
+        android:textColor="#ffffff"
+        android:textSize="50sp"
+        android:textStyle="bold"/>
+
+    <ImageButton
+        android:id="@+id/cameraFull"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/camera_128"
+        android:layout_marginTop="200dp"
+        android:layout_gravity="center_horizontal"
+        android:background="?android:attr/selectableItemBackground"/>
+    <ImageButton
+        android:id="@+id/galleryFull"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="400dp"
+        android:src="@drawable/gallery_button_128"
+        android:layout_gravity="center_horizontal"
+        android:background="?android:attr/selectableItemBackground"/>
+
+
+    <!--<RelativeLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--&gt;-->
+
+    <!--<Button-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="200dp"-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:text="Camera"-->
+    <!--android:textColor="#"-->
+    <!--android:background="@drawable/button_shape"-->
+    <!--android:textAllCaps="false"-->
+
+    <!--android:textSize="40sp"/>-->
+    <!--</RelativeLayout>-->
+    <!-- This FrameLayout insets its children based on system windows using
+         android:fitsSystemWindows. -->
+    <!--<FrameLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:fitsSystemWindows="true">-->
+
+    <!--<LinearLayout-->
+    <!--android:id="@+id/fullscreen_content_controls"-->
+    <!--style="?metaButtonBarStyle"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="bottom|center_horizontal"-->
+    <!--android:background="@color/black_overlay"-->
+    <!--android:orientation="horizontal"-->
+    <!--tools:ignore="UselessParent">-->
+
+    <!--<Button-->
+    <!--android:id="@+id/dummy_button"-->
+    <!--style="?metaButtonBarButtonStyle"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:text="@string/dummy_button"/>-->
+
+    <!--</LinearLayout>-->
+    <!--</FrameLayout>-->
+
+</FrameLayout>

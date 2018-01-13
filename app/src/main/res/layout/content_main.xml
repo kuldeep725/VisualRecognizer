@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/relativeLayout"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_main"
+    tools:context="com.ibm.mysampleapp.activities.MainActivity">
+    <!--android:paddingTop="@dimen/activity_vertical_margin"-->
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="100dp"
+        android:text="Select an Image"
+        android:textSize="20sp"/>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:id="@+id/swipeView">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/frame">
+
+            <ImageView
+                android:id="@+id/loadedImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:background="@drawable/image_border"
+                android:scaleType="fitCenter"/>
+
+        </FrameLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <FrameLayout
+        android:layout_width="30dp"
+        android:layout_height="40dp"
+        android:layout_above="@+id/textLayout"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp">
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/cameraFab"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            app:backgroundTint="#eeeeee"
+            android:src="@android:drawable/ic_menu_camera"/>
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/textLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/swipeView"
+        android:divider="@drawable/vertical_divider"
+        android:showDividers="middle"
+        android:background="#fafafa"
+        android:baselineAligned="false">
+        <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginBottom="10dp"
+                android:padding="10dp"
+                android:text="@string/classified"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:background="@drawable/underline"
+                android:textSize="25sp"
+                android:textStyle="bold"/>
+
+            <ListView
+                android:id="@+id/listOfClassify"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:textAlignment="center">
+            </ListView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/facialLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginBottom="10dp"
+                android:padding="10dp"
+                android:background="@drawable/underline"
+                android:text="@string/facial"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="25sp"
+                android:textStyle="bold"/>
+
+            <ListView
+                android:id="@+id/listOfFaceDetect"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:padding="10dp"
+                android:scrollbarSize="1dp"
+                android:textAlignment="center">
+            </ListView>
+        </LinearLayout>
+        <!--</ScrollView>-->
+
+    </LinearLayout>
+
+</RelativeLayout>
+    <!--android:paddingLeft="@dimen/activity_horizontal_margin"-->
+    <!--android:paddingRight="@dimen/activity_horizontal_margin"-->
+
+<!--<android.support.v7.widget.AppCompatTextView-->
+<!--android:id="@+id/multiLineText"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:layout_gravity="top"-->
+<!--android:textSize="20sp"-->
+<!--android:layout_margin="20dp"    />-->

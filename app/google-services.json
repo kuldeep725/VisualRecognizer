@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "712539873792",
+    "firebase_url": "https://visualrecognization.firebaseio.com",
+    "project_id": "visualrecognization",
+    "storage_bucket": "visualrecognization.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:712539873792:android:417599cbd89142db",
+        "android_client_info": {
+          "package_name": "com.ibm.mysampleapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "712539873792-lb91l653htnmboei41n3b53rikdikm6a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGII_ZhQNMv_-N_zJLIv4oSALDqlD6Fh4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
