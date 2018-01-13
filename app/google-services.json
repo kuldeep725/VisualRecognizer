@@ -1,27 +1,33 @@
 {
   "project_info": {
-    "project_number": "712539873792",
-    "firebase_url": "https://visualrecognization.firebaseio.com",
-    "project_id": "visualrecognization",
-    "storage_bucket": "visualrecognization.appspot.com"
+    "project_number": "739140410464",
+    "project_id": "visualrecognizer-192006"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:712539873792:android:417599cbd89142db",
+        "mobilesdk_app_id": "1:739140410464:android:417599cbd89142db",
         "android_client_info": {
           "package_name": "com.ibm.mysampleapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "712539873792-lb91l653htnmboei41n3b53rikdikm6a.apps.googleusercontent.com",
+          "client_id": "739140410464-0h8vs1dld6vehc693043a1iv5ovcamgb.apps.googleusercontent.com",
           "client_type": 3
+        },
+        {
+          "client_id": "739140410464-vtib4qc3peh4rjbbn5t2e5v1p43vhoti.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ibm.mysampleapp",
+            "certificate_hash": "ba4c85b466ff879488a6352884569b0d851d9acb"
+          }
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDGII_ZhQNMv_-N_zJLIv4oSALDqlD6Fh4"
+          "current_key": "AIzaSyAU5_LeV0kZBONKXlJ804DKE_ZPiafFKWs"
         }
       ],
       "services": {
@@ -33,7 +39,7 @@
           "other_platform_oauth_client": []
         },
         "ads_service": {
-          "status": 2
+          "status": 1
         }
       }
     }

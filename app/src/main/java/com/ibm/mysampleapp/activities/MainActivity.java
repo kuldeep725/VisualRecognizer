@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         @Override
     protected void onCreate(Bundle savedInstanceState) {
-         Log.d(TAG, "onCreate fired...");
+         Log.d(TAG, "MainActivity onCreate fired...");
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_main);
 //	Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

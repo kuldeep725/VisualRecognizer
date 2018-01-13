@@ -26,18 +26,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/camera_128"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="150dp"
         android:layout_gravity="center_horizontal"
         android:background="?android:attr/selectableItemBackground"/>
     <ImageButton
         android:id="@+id/galleryFull"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="300dp"
         android:src="@drawable/gallery_button_128"
         android:layout_gravity="center_horizontal"
         android:background="?android:attr/selectableItemBackground"/>
-
+    <Button
+        android:id="@+id/log_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log Out"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="40dp"
+        android:textSize="15sp"
+        android:background="?android:attr/selectableItemBackground"
+        android:textColor="#ffffff"/>
 
     <!--<RelativeLayout-->
     <!--android:layout_width="match_parent"-->

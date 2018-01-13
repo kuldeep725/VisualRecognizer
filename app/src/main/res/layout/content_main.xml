@@ -35,7 +35,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
-                android:background="@drawable/image_border"
                 android:scaleType="fitCenter"/>
 
         </FrameLayout>
@@ -47,11 +46,11 @@
         android:layout_above="@+id/textLayout"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="10dp">
-        <android.support.design.widget.FloatingActionButton
+        <ImageButton
             android:id="@+id/cameraFab"
             android:layout_width="30dp"
             android:layout_height="40dp"
-            app:backgroundTint="#eeeeee"
+            android:background="@android:color/transparent"
             android:src="@android:drawable/ic_menu_camera"/>
     </FrameLayout>
 
@@ -93,6 +92,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="10dp"
+                android:divider="@android:color/transparent"
+                android:dividerHeight="10.0sp"
                 android:textAlignment="center">
             </ListView>
         </LinearLayout>
@@ -121,9 +122,9 @@
                 android:id="@+id/listOfFaceDetect"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="center"
                 android:padding="10dp"
-                android:scrollbarSize="1dp"
+                android:divider="@android:color/transparent"
+                android:dividerHeight="10.0sp"
                 android:textAlignment="center">
             </ListView>
         </LinearLayout>
