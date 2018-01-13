@@ -123,9 +123,9 @@ public final class CameraHelper {
     Log.d(TAG, "imageFileName = "+imageFileName);
     File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
     Log.d(TAG,"storageDir = "+storageDir);
-    File file = new File(storageDir, "demoImage.jpg");
     try {
             boolean temp = storageDir.mkdirs();
+//            File file = new File(storageDir, "demoImage.jpg");
             Log.d(TAG, "temp  = "+temp);
     }
     catch (Exception e) {

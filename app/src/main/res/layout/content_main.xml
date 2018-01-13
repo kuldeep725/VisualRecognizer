@@ -35,7 +35,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
-                android:src="@drawable/ic_photo_camera_black_24dp"
                 android:scaleType="fitCenter"/>
 
         </FrameLayout>

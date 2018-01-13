@@ -10,15 +10,11 @@ import android.os.RemoteException;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ibm.mobilefirstplatform.clientsdk.android.core.api.BMSClient;
@@ -62,48 +58,47 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         private ListView classifyListView;
         ProgressDialog progressDialog;
         private  SwipeRefreshLayout swipeView;
-        private TextView classifyTextView;
-        private TextView facialTextView;
+//        private TextView classifyTextView;
+//        private TextView facialTextView;
 
         @Override
     protected void onCreate(Bundle savedInstanceState) {
-         Log.d(TAG, "MainActivity onCreate fired...");
-	super.onCreate(savedInstanceState);
-	setContentView(R.layout.activity_main);
-//	Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//	setSupportActionBar(toolbar);
+                 Log.d(TAG, "MainActivity onCreate fired...");
+                super.onCreate(savedInstanceState);
+                setContentView(R.layout.activity_main);
+        //	Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //	setSupportActionBar(toolbar);
 
-        service = new VisualRecognition(
-                VisualRecognition.VERSION_DATE_2016_05_20
-        );
-        Log.d(TAG, "service = " + service);
-        service.setApiKey(API_KEY);
-         Log.d(TAG, "API = " + R.string.visualrecognitionApi_key);
+                service = new VisualRecognition(
+                        VisualRecognition.VERSION_DATE_2016_05_20
+                );
+                Log.d(TAG, "service = " + service);
+                service.setApiKey(API_KEY);
+                 Log.d(TAG, "API = " + R.string.visualrecognitionApi_key);
 
-        galleryHelper = new GalleryHelper(this);
-        cameraHelper = new CameraHelper(this);
-        loadedImage = (ImageView) findViewById(R.id.loadedImage);
-        faceListView = (ListView) findViewById(R.id.listOfFaceDetect);
-        classifyListView = (ListView) findViewById(R.id.listOfClassify);
-        classifyList = new ArrayList<>();
-        faceDetectList = new ArrayList<>();
-        classifyTextView = (TextView) findViewById(R.id.classifyText);
-        facialTextView = (TextView) findViewById(R.id.facialText);
+                galleryHelper = new GalleryHelper(this);
+                cameraHelper = new CameraHelper(this);
+                loadedImage = (ImageView) findViewById(R.id.loadedImage);
+                faceListView = (ListView) findViewById(R.id.listOfFaceDetect);
+                classifyListView = (ListView) findViewById(R.id.listOfClassify);
+                classifyList = new ArrayList<>();
+                faceDetectList = new ArrayList<>();
+//                classifyTextView = (TextView) findViewById(R.id.classifyText);
+//                facialTextView = (TextView) findViewById(R.id.facialText);
 
-        swipeView = (SwipeRefreshLayout) findViewById(R.id.swipeView);
-        classifyTextView.setVisibility(View.INVISIBLE);
-        facialTextView.setVisibility(View.INVISIBLE);
-        swipeView.setOnRefreshListener(this);
+                swipeView = (SwipeRefreshLayout) findViewById(R.id.swipeView);
+//                classifyTextView.setVisibility(View.INVISIBLE);
+//                facialTextView.setVisibility(View.INVISIBLE);
+                swipeView.setOnRefreshListener(this);
 
-       final ImageButton fab = (ImageButton) findViewById(R.id.fab);
-	fab.setOnClickListener(new View.OnClickListener() {
-	    @Override
-	    public void onClick(View view) {
-		    galleryHelper.dispatchGalleryIntent();
-	    }
-	});
+               final ImageButton fab = (ImageButton) findViewById(R.id.fab);
+                fab.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                            galleryHelper.dispatchGalleryIntent();
+                    }
+                });
 
-//            FloatingActionButton cameraFab = (FloatingActionButton) findViewById(R.id.cameraFab);
                 ImageButton cameraFab = (ImageButton) findViewById(R.id.cameraFab);
                 cameraFab.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -114,8 +109,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                         }
                 });
 
-                RelativeLayout rl = (RelativeLayout) findViewById(R.id.relativeLayout);
-
                 loadedImage.setOnTouchListener(new OnSwipeTouchListener(MainActivity.this) {
 
                         public void onSwipeRight() {
@@ -123,8 +116,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                         }
 
          });
-	// Core SDK must be initialized to interact with Bluemix Mobile services.
-	BMSClient.getInstance().initialize(getApplicationContext(), BMSClient.REGION_UK);
+	        // Core SDK must be initialized to interact with Bluemix Mobile services.
+	        BMSClient.getInstance().initialize(getApplicationContext(), BMSClient.REGION_UK);
 
     }
 
@@ -183,65 +176,45 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         private void processImage(final File imageFile) throws SSLException, RemoteException {
 
-                Log.d(TAG, "ImageFile = "+ imageFile);
-                if(!isInternetOn()) {
-                        Toast.makeText(MainActivity.this, "Internet is not working", Toast.LENGTH_SHORT).show();
-                        return;
-                }
-                if(imageFile == null) {
-                        return;
-                }
-                classifyListView.setAdapter(null);
-                faceListView.setAdapter(null);
-                classifyList.clear();
-                faceDetectList.clear();
-                classifyTextView.setVisibility(View.VISIBLE);
-                facialTextView.setVisibility(View.VISIBLE);
-                try {
-                        AnalyzeImage analyzeImage = new AnalyzeImage();
-                        analyzeImage.execute();
-                } catch (RuntimeException e) {
-                        Log.d(TAG, "RUN TIME EXCEPTION : " + e.getMessage());
-                }
+                        Log.d(TAG, "ImageFile = "+ imageFile);
+                        if(!isInternetOn()) {
+                                Toast.makeText(MainActivity.this, "Internet is not working", Toast.LENGTH_SHORT).show();
+                                return;
+                        }
+                        if(imageFile == null) {
+                                return;
+                        }
+                        classifyListView.setAdapter(null);
+                        faceListView.setAdapter(null);
+                        classifyList.clear();
+                        faceDetectList.clear();
+//                        classifyTextView.setVisibility(View.VISIBLE);
+//                        facialTextView.setVisibility(View.VISIBLE);
+                        try {
+                                AnalyzeImage analyzeImage = new AnalyzeImage();
+                                analyzeImage.execute();
+                        } catch (RuntimeException e) {
+                                Log.d(TAG, "RUN TIME EXCEPTION : " + e.getMessage());
+                        }
 
          }
 
         @Override
     public void onResume() {
-	super.onResume();
+	        super.onResume();
     }
 
     @Override
     public void onPause() {
-	super.onPause();
-	if(progressDialog != null) {
-                progressDialog.dismiss();
-        }
+                super.onPause();
+                if(progressDialog != null) {
+                        progressDialog.dismiss();
+                }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-	// Inflate the menu; this adds items to the action bar if it is present.
-	getMenuInflater().inflate(R.menu.menu_main, menu);
-	return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-	// Handle action bar item clicks here. The action bar will
-	// automatically handle clicks on the Home/Up button, so long
-	// as you specify a parent activity in AndroidManifest.xml.
-	int id = item.getItemId();
-
-	if (id == R.id.action_settings) {
-	    return true;
-	}
-
-	return super.onOptionsItemSelected(item);
-    }
         public boolean isInternetOn () {
 
-//                Log.e(TAG, "isInternetOn fired");
+//                Log.d(TAG, "isInternetOn fired");
                 ConnectivityManager connec =
                         (ConnectivityManager)getSystemService(CONNECTIVITY_SERVICE);
 
